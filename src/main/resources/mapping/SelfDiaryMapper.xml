@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nya.manage.mapper.SelfDiaryMapper" >
+  <resultMap id="BaseResultMap" type="com.nya.manage.entity.SelfDiary" >
+    <id column="diary_id" property="diaryId" jdbcType="INTEGER" />
+    <result column="self_id" property="selfId" jdbcType="INTEGER" />
+    <result column="diary_date" property="diaryDate" jdbcType="VARCHAR" />
+    <result column="diary_weather" property="diaryWeather" jdbcType="VARCHAR" />
+    <result column="diary_location" property="diaryLocation" jdbcType="VARCHAR" />
+    <result column="diary_mood" property="diaryMood" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="BIGINT" />
+    <result column="update_time" property="updateTime" jdbcType="BIGINT" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.nya.manage.entity.SelfDiary" extends="BaseResultMap" >
+    <result column="diary_content" property="diaryContent" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    diary_id, self_id, diary_date, diary_weather, diary_location, diary_mood, create_time, 
+    update_time
+  </sql>
+  <sql id="Blob_Column_List" >
+    diary_content
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from self-diary
+    where diary_id = #{diaryId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from self-diary
+    where diary_id = #{diaryId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.nya.manage.entity.SelfDiary" >
+    insert into self-diary (diary_id, self_id, diary_date, 
+      diary_weather, diary_location, diary_mood, 
+      create_time, update_time, diary_content
+      )
+    values (#{diaryId,jdbcType=INTEGER}, #{selfId,jdbcType=INTEGER}, #{diaryDate,jdbcType=VARCHAR}, 
+      #{diaryWeather,jdbcType=VARCHAR}, #{diaryLocation,jdbcType=VARCHAR}, #{diaryMood,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=BIGINT}, #{updateTime,jdbcType=BIGINT}, #{diaryContent,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.nya.manage.entity.SelfDiary" >
+    insert into self-diary
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="diaryId != null" >
+        diary_id,
+      </if>
+      <if test="selfId != null" >
+        self_id,
+      </if>
+      <if test="diaryDate != null" >
+        diary_date,
+      </if>
+      <if test="diaryWeather != null" >
+        diary_weather,
+      </if>
+      <if test="diaryLocation != null" >
+        diary_location,
+      </if>
+      <if test="diaryMood != null" >
+        diary_mood,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="diaryContent != null" >
+        diary_content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="diaryId != null" >
+        #{diaryId,jdbcType=INTEGER},
+      </if>
+      <if test="selfId != null" >
+        #{selfId,jdbcType=INTEGER},
+      </if>
+      <if test="diaryDate != null" >
+        #{diaryDate,jdbcType=VARCHAR},
+      </if>
+      <if test="diaryWeather != null" >
+        #{diaryWeather,jdbcType=VARCHAR},
+      </if>
+      <if test="diaryLocation != null" >
+        #{diaryLocation,jdbcType=VARCHAR},
+      </if>
+      <if test="diaryMood != null" >
+        #{diaryMood,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=BIGINT},
+      </if>
+      <if test="diaryContent != null" >
+        #{diaryContent,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.nya.manage.entity.SelfDiary" >
+    update self-diary
+    <set >
+      <if test="selfId != null" >
+        self_id = #{selfId,jdbcType=INTEGER},
+      </if>
+      <if test="diaryDate != null" >
+        diary_date = #{diaryDate,jdbcType=VARCHAR},
+      </if>
+      <if test="diaryWeather != null" >
+        diary_weather = #{diaryWeather,jdbcType=VARCHAR},
+      </if>
+      <if test="diaryLocation != null" >
+        diary_location = #{diaryLocation,jdbcType=VARCHAR},
+      </if>
+      <if test="diaryMood != null" >
+        diary_mood = #{diaryMood,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=BIGINT},
+      </if>
+      <if test="diaryContent != null" >
+        diary_content = #{diaryContent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where diary_id = #{diaryId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.nya.manage.entity.SelfDiary" >
+    update self-diary
+    set self_id = #{selfId,jdbcType=INTEGER},
+      diary_date = #{diaryDate,jdbcType=VARCHAR},
+      diary_weather = #{diaryWeather,jdbcType=VARCHAR},
+      diary_location = #{diaryLocation,jdbcType=VARCHAR},
+      diary_mood = #{diaryMood,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=BIGINT},
+      update_time = #{updateTime,jdbcType=BIGINT},
+      diary_content = #{diaryContent,jdbcType=LONGVARCHAR}
+    where diary_id = #{diaryId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.nya.manage.entity.SelfDiary" >
+    update self-diary
+    set self_id = #{selfId,jdbcType=INTEGER},
+      diary_date = #{diaryDate,jdbcType=VARCHAR},
+      diary_weather = #{diaryWeather,jdbcType=VARCHAR},
+      diary_location = #{diaryLocation,jdbcType=VARCHAR},
+      diary_mood = #{diaryMood,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=BIGINT},
+      update_time = #{updateTime,jdbcType=BIGINT}
+    where diary_id = #{diaryId,jdbcType=INTEGER}
+  </update>
+</mapper>

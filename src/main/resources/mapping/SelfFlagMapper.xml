@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nya.manage.mapper.SelfFlagMapper" >
+  <resultMap id="BaseResultMap" type="com.nya.manage.entity.SelfFlag" >
+    <id column="flag_id" property="flagId" jdbcType="INTEGER" />
+    <result column="flag_name" property="flagName" jdbcType="VARCHAR" />
+    <result column="flag_level" property="flagLevel" jdbcType="INTEGER" />
+    <result column="flag_content" property="flagContent" jdbcType="VARCHAR" />
+    <result column="parent_id" property="parentId" jdbcType="INTEGER" />
+    <result column="flag_children" property="flagChildren" jdbcType="VARCHAR" />
+    <result column="flag_id_absolute" property="flagIdAbsolute" jdbcType="VARCHAR" />
+    <result column="flag_name_absolute" property="flagNameAbsolute" jdbcType="VARCHAR" />
+    <result column="self_id" property="selfId" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="BIGINT" />
+    <result column="update_time" property="updateTime" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    flag_id, flag_name, flag_level, flag_content, parent_id, flag_children, flag_id_absolute, 
+    flag_name_absolute, self_id, create_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from self-flag
+    where flag_id = #{flagId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from self-flag
+    where flag_id = #{flagId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.nya.manage.entity.SelfFlag" >
+    insert into self-flag (flag_id, flag_name, flag_level, 
+      flag_content, parent_id, flag_children, 
+      flag_id_absolute, flag_name_absolute, self_id, 
+      create_time, update_time)
+    values (#{flagId,jdbcType=INTEGER}, #{flagName,jdbcType=VARCHAR}, #{flagLevel,jdbcType=INTEGER}, 
+      #{flagContent,jdbcType=VARCHAR}, #{parentId,jdbcType=INTEGER}, #{flagChildren,jdbcType=VARCHAR}, 
+      #{flagIdAbsolute,jdbcType=VARCHAR}, #{flagNameAbsolute,jdbcType=VARCHAR}, #{selfId,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=BIGINT}, #{updateTime,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.nya.manage.entity.SelfFlag" >
+    insert into self-flag
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="flagId != null" >
+        flag_id,
+      </if>
+      <if test="flagName != null" >
+        flag_name,
+      </if>
+      <if test="flagLevel != null" >
+        flag_level,
+      </if>
+      <if test="flagContent != null" >
+        flag_content,
+      </if>
+      <if test="parentId != null" >
+        parent_id,
+      </if>
+      <if test="flagChildren != null" >
+        flag_children,
+      </if>
+      <if test="flagIdAbsolute != null" >
+        flag_id_absolute,
+      </if>
+      <if test="flagNameAbsolute != null" >
+        flag_name_absolute,
+      </if>
+      <if test="selfId != null" >
+        self_id,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="flagId != null" >
+        #{flagId,jdbcType=INTEGER},
+      </if>
+      <if test="flagName != null" >
+        #{flagName,jdbcType=VARCHAR},
+      </if>
+      <if test="flagLevel != null" >
+        #{flagLevel,jdbcType=INTEGER},
+      </if>
+      <if test="flagContent != null" >
+        #{flagContent,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null" >
+        #{parentId,jdbcType=INTEGER},
+      </if>
+      <if test="flagChildren != null" >
+        #{flagChildren,jdbcType=VARCHAR},
+      </if>
+      <if test="flagIdAbsolute != null" >
+        #{flagIdAbsolute,jdbcType=VARCHAR},
+      </if>
+      <if test="flagNameAbsolute != null" >
+        #{flagNameAbsolute,jdbcType=VARCHAR},
+      </if>
+      <if test="selfId != null" >
+        #{selfId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.nya.manage.entity.SelfFlag" >
+    update self-flag
+    <set >
+      <if test="flagName != null" >
+        flag_name = #{flagName,jdbcType=VARCHAR},
+      </if>
+      <if test="flagLevel != null" >
+        flag_level = #{flagLevel,jdbcType=INTEGER},
+      </if>
+      <if test="flagContent != null" >
+        flag_content = #{flagContent,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null" >
+        parent_id = #{parentId,jdbcType=INTEGER},
+      </if>
+      <if test="flagChildren != null" >
+        flag_children = #{flagChildren,jdbcType=VARCHAR},
+      </if>
+      <if test="flagIdAbsolute != null" >
+        flag_id_absolute = #{flagIdAbsolute,jdbcType=VARCHAR},
+      </if>
+      <if test="flagNameAbsolute != null" >
+        flag_name_absolute = #{flagNameAbsolute,jdbcType=VARCHAR},
+      </if>
+      <if test="selfId != null" >
+        self_id = #{selfId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=BIGINT},
+      </if>
+    </set>
+    where flag_id = #{flagId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.nya.manage.entity.SelfFlag" >
+    update self-flag
+    set flag_name = #{flagName,jdbcType=VARCHAR},
+      flag_level = #{flagLevel,jdbcType=INTEGER},
+      flag_content = #{flagContent,jdbcType=VARCHAR},
+      parent_id = #{parentId,jdbcType=INTEGER},
+      flag_children = #{flagChildren,jdbcType=VARCHAR},
+      flag_id_absolute = #{flagIdAbsolute,jdbcType=VARCHAR},
+      flag_name_absolute = #{flagNameAbsolute,jdbcType=VARCHAR},
+      self_id = #{selfId,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=BIGINT},
+      update_time = #{updateTime,jdbcType=BIGINT}
+    where flag_id = #{flagId,jdbcType=INTEGER}
+  </update>
+</mapper>

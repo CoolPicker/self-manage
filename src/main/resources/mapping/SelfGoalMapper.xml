@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nya.manage.mapper.SelfGoalMapper" >
+  <resultMap id="BaseResultMap" type="com.nya.manage.entity.SelfGoal" >
+    <id column="goal_id" property="goalId" jdbcType="INTEGER" />
+    <result column="self_id" property="selfId" jdbcType="INTEGER" />
+    <result column="goal_content" property="goalContent" jdbcType="VARCHAR" />
+    <result column="goal_level" property="goalLevel" jdbcType="INTEGER" />
+    <result column="goal_times" property="goalTimes" jdbcType="INTEGER" />
+    <result column="is_new" property="isNew" jdbcType="INTEGER" />
+    <result column="goal_year" property="goalYear" jdbcType="INTEGER" />
+    <result column="goal_month" property="goalMonth" jdbcType="INTEGER" />
+    <result column="goal_day" property="goalDay" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="BIGINT" />
+    <result column="update_time" property="updateTime" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    goal_id, self_id, goal_content, goal_level, goal_times, is_new, goal_year, goal_month, 
+    goal_day, create_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from self-goal
+    where goal_id = #{goalId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from self-goal
+    where goal_id = #{goalId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.nya.manage.entity.SelfGoal" >
+    insert into self-goal (goal_id, self_id, goal_content, 
+      goal_level, goal_times, is_new, 
+      goal_year, goal_month, goal_day, 
+      create_time, update_time)
+    values (#{goalId,jdbcType=INTEGER}, #{selfId,jdbcType=INTEGER}, #{goalContent,jdbcType=VARCHAR}, 
+      #{goalLevel,jdbcType=INTEGER}, #{goalTimes,jdbcType=INTEGER}, #{isNew,jdbcType=INTEGER}, 
+      #{goalYear,jdbcType=INTEGER}, #{goalMonth,jdbcType=INTEGER}, #{goalDay,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=BIGINT}, #{updateTime,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.nya.manage.entity.SelfGoal" >
+    insert into self-goal
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="goalId != null" >
+        goal_id,
+      </if>
+      <if test="selfId != null" >
+        self_id,
+      </if>
+      <if test="goalContent != null" >
+        goal_content,
+      </if>
+      <if test="goalLevel != null" >
+        goal_level,
+      </if>
+      <if test="goalTimes != null" >
+        goal_times,
+      </if>
+      <if test="isNew != null" >
+        is_new,
+      </if>
+      <if test="goalYear != null" >
+        goal_year,
+      </if>
+      <if test="goalMonth != null" >
+        goal_month,
+      </if>
+      <if test="goalDay != null" >
+        goal_day,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="goalId != null" >
+        #{goalId,jdbcType=INTEGER},
+      </if>
+      <if test="selfId != null" >
+        #{selfId,jdbcType=INTEGER},
+      </if>
+      <if test="goalContent != null" >
+        #{goalContent,jdbcType=VARCHAR},
+      </if>
+      <if test="goalLevel != null" >
+        #{goalLevel,jdbcType=INTEGER},
+      </if>
+      <if test="goalTimes != null" >
+        #{goalTimes,jdbcType=INTEGER},
+      </if>
+      <if test="isNew != null" >
+        #{isNew,jdbcType=INTEGER},
+      </if>
+      <if test="goalYear != null" >
+        #{goalYear,jdbcType=INTEGER},
+      </if>
+      <if test="goalMonth != null" >
+        #{goalMonth,jdbcType=INTEGER},
+      </if>
+      <if test="goalDay != null" >
+        #{goalDay,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.nya.manage.entity.SelfGoal" >
+    update self-goal
+    <set >
+      <if test="selfId != null" >
+        self_id = #{selfId,jdbcType=INTEGER},
+      </if>
+      <if test="goalContent != null" >
+        goal_content = #{goalContent,jdbcType=VARCHAR},
+      </if>
+      <if test="goalLevel != null" >
+        goal_level = #{goalLevel,jdbcType=INTEGER},
+      </if>
+      <if test="goalTimes != null" >
+        goal_times = #{goalTimes,jdbcType=INTEGER},
+      </if>
+      <if test="isNew != null" >
+        is_new = #{isNew,jdbcType=INTEGER},
+      </if>
+      <if test="goalYear != null" >
+        goal_year = #{goalYear,jdbcType=INTEGER},
+      </if>
+      <if test="goalMonth != null" >
+        goal_month = #{goalMonth,jdbcType=INTEGER},
+      </if>
+      <if test="goalDay != null" >
+        goal_day = #{goalDay,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=BIGINT},
+      </if>
+    </set>
+    where goal_id = #{goalId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.nya.manage.entity.SelfGoal" >
+    update self-goal
+    set self_id = #{selfId,jdbcType=INTEGER},
+      goal_content = #{goalContent,jdbcType=VARCHAR},
+      goal_level = #{goalLevel,jdbcType=INTEGER},
+      goal_times = #{goalTimes,jdbcType=INTEGER},
+      is_new = #{isNew,jdbcType=INTEGER},
+      goal_year = #{goalYear,jdbcType=INTEGER},
+      goal_month = #{goalMonth,jdbcType=INTEGER},
+      goal_day = #{goalDay,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=BIGINT},
+      update_time = #{updateTime,jdbcType=BIGINT}
+    where goal_id = #{goalId,jdbcType=INTEGER}
+  </update>
+</mapper>
