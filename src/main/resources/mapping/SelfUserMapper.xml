@@ -3,35 +3,70 @@
 <mapper namespace="com.nya.manage.mapper.SelfUserMapper" >
   <resultMap id="BaseResultMap" type="com.nya.manage.entity.SelfUser" >
     <id column="self_id" property="selfId" jdbcType="INTEGER" />
+    <result column="self_name" property="selfName" jdbcType="VARCHAR" />
     <result column="self_pass" property="selfPass" jdbcType="VARCHAR" />
     <result column="self_status" property="selfStatus" jdbcType="INTEGER" />
     <result column="create_time" property="createTime" jdbcType="BIGINT" />
     <result column="update_time" property="updateTime" jdbcType="BIGINT" />
   </resultMap>
   <sql id="Base_Column_List" >
-    self_id, self_pass, self_status, create_time, update_time
+    self_id, self_name, self_pass, self_status, create_time, update_time
   </sql>
+
+  <select id="selectMaxSelfId" resultType="java.lang.Integer">
+    select max(self_id) as id from self_user
+  </select>
+
+  <!--通过用户名/id登录-->
+  <select id="selectByUsernameSelfIdSelective" resultMap="BaseResultMap" parameterType="com.nya.manage.entity.SelfUser">
+    select
+    <include refid="Base_Column_List" />
+    from self_user
+    where self_pass = #{selfPass,jdbcType=VARCHAR}
+    <if test="selfName != null" >
+      and self_name = #{selfName,jdbcType=VARCHAR}
+    </if>
+    <if test="selfId != null" >
+      and self_id = #{selfId,jdbcType=INTEGER}
+    </if>
+  </select>
+
+
+  <!--通过用户名获取用户信息-->
+  <select id="selectByUsername" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select
+    <include refid="Base_Column_List" />
+    from self_user
+    where self_name = #{selfName,jdbcType=VARCHAR}
+  </select>
+
+
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
-    from self-user
+    from self_user
     where self_id = #{selfId,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from self-user
+    delete from self_user
     where self_id = #{selfId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.nya.manage.entity.SelfUser" >
-    insert into self-user (self_id, self_pass, self_status, 
-      create_time, update_time)
-    values (#{selfId,jdbcType=INTEGER}, #{selfPass,jdbcType=VARCHAR}, #{selfStatus,jdbcType=INTEGER}, 
-      #{createTime,jdbcType=BIGINT}, #{updateTime,jdbcType=BIGINT})
+    insert into self_user (self_id, self_name, self_pass,
+      self_status, create_time, update_time
+      )
+    values (#{selfId,jdbcType=INTEGER}, #{selfName,jdbcType=VARCHAR}, #{selfPass,jdbcType=VARCHAR}, 
+      #{selfStatus,jdbcType=INTEGER}, #{createTime,jdbcType=BIGINT}, #{updateTime,jdbcType=BIGINT}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.nya.manage.entity.SelfUser" >
-    insert into self-user
+    insert into self_user
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="selfId != null" >
         self_id,
+      </if>
+      <if test="selfName != null" >
+        self_name,
       </if>
       <if test="selfPass != null" >
         self_pass,
@@ -50,6 +85,9 @@
       <if test="selfId != null" >
         #{selfId,jdbcType=INTEGER},
       </if>
+      <if test="selfName != null" >
+        #{selfName,jdbcType=VARCHAR},
+      </if>
       <if test="selfPass != null" >
         #{selfPass,jdbcType=VARCHAR},
       </if>
@@ -65,8 +103,11 @@
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.nya.manage.entity.SelfUser" >
-    update self-user
+    update self_user
     <set >
+      <if test="selfName != null" >
+        self_name = #{selfName,jdbcType=VARCHAR},
+      </if>
       <if test="selfPass != null" >
         self_pass = #{selfPass,jdbcType=VARCHAR},
       </if>
@@ -83,8 +124,9 @@
     where self_id = #{selfId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.nya.manage.entity.SelfUser" >
-    update self-user
-    set self_pass = #{selfPass,jdbcType=VARCHAR},
+    update self_user
+    set self_name = #{selfName,jdbcType=VARCHAR},
+      self_pass = #{selfPass,jdbcType=VARCHAR},
       self_status = #{selfStatus,jdbcType=INTEGER},
       create_time = #{createTime,jdbcType=BIGINT},
       update_time = #{updateTime,jdbcType=BIGINT}

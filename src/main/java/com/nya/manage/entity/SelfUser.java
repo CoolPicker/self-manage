@@ -3,7 +3,10 @@ package com.nya.manage.entity;
 public class SelfUser {
     private Integer selfId;
 
-    private String selfPass;
+    private String selfName;
+
+    // 阻止序列化
+    private transient String selfPass;
 
     private Integer selfStatus;
 
@@ -17,6 +20,14 @@ public class SelfUser {
 
     public void setSelfId(Integer selfId) {
         this.selfId = selfId;
+    }
+
+    public String getSelfName() {
+        return selfName;
+    }
+
+    public void setSelfName(String selfName) {
+        this.selfName = selfName == null ? null : selfName.trim();
     }
 
     public String getSelfPass() {
@@ -49,5 +60,16 @@ public class SelfUser {
 
     public void setUpdateTime(Long updateTime) {
         this.updateTime = updateTime;
+    }
+
+    @Override
+    public String toString() {
+        return "SelfUser{" +
+                "selfName='" + selfName + '\'' +
+                ", selfPass='" + selfPass + '\'' +
+                ", selfStatus=" + selfStatus +
+                ", createTime=" + createTime +
+                ", updateTime=" + updateTime +
+                '}';
     }
 }

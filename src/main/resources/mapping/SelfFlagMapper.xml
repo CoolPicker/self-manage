@@ -21,15 +21,15 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
-    from self-flag
+    from self_flag
     where flag_id = #{flagId,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from self-flag
+    delete from self_flag
     where flag_id = #{flagId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.nya.manage.entity.SelfFlag" >
-    insert into self-flag (flag_id, flag_name, flag_level, 
+    insert into self_flag (flag_id, flag_name, flag_level, 
       flag_content, parent_id, flag_children, 
       flag_id_absolute, flag_name_absolute, self_id, 
       create_time, update_time)
@@ -39,7 +39,7 @@
       #{createTime,jdbcType=BIGINT}, #{updateTime,jdbcType=BIGINT})
   </insert>
   <insert id="insertSelective" parameterType="com.nya.manage.entity.SelfFlag" >
-    insert into self-flag
+    insert into self_flag
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="flagId != null" >
         flag_id,
@@ -112,7 +112,7 @@
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.nya.manage.entity.SelfFlag" >
-    update self-flag
+    update self_flag
     <set >
       <if test="flagName != null" >
         flag_name = #{flagName,jdbcType=VARCHAR},
@@ -148,7 +148,7 @@
     where flag_id = #{flagId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.nya.manage.entity.SelfFlag" >
-    update self-flag
+    update self_flag
     set flag_name = #{flagName,jdbcType=VARCHAR},
       flag_level = #{flagLevel,jdbcType=INTEGER},
       flag_content = #{flagContent,jdbcType=VARCHAR},

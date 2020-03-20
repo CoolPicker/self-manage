@@ -26,15 +26,15 @@
     <include refid="Base_Column_List" />
     ,
     <include refid="Blob_Column_List" />
-    from self-diary
+    from self_diary
     where diary_id = #{diaryId,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from self-diary
+    delete from self_diary
     where diary_id = #{diaryId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.nya.manage.entity.SelfDiary" >
-    insert into self-diary (diary_id, self_id, diary_date, 
+    insert into self_diary (diary_id, self_id, diary_date, 
       diary_weather, diary_location, diary_mood, 
       create_time, update_time, diary_content
       )
@@ -44,7 +44,7 @@
       )
   </insert>
   <insert id="insertSelective" parameterType="com.nya.manage.entity.SelfDiary" >
-    insert into self-diary
+    insert into self_diary
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="diaryId != null" >
         diary_id,
@@ -105,7 +105,7 @@
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.nya.manage.entity.SelfDiary" >
-    update self-diary
+    update self_diary
     <set >
       <if test="selfId != null" >
         self_id = #{selfId,jdbcType=INTEGER},
@@ -135,7 +135,7 @@
     where diary_id = #{diaryId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.nya.manage.entity.SelfDiary" >
-    update self-diary
+    update self_diary
     set self_id = #{selfId,jdbcType=INTEGER},
       diary_date = #{diaryDate,jdbcType=VARCHAR},
       diary_weather = #{diaryWeather,jdbcType=VARCHAR},
@@ -147,7 +147,7 @@
     where diary_id = #{diaryId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.nya.manage.entity.SelfDiary" >
-    update self-diary
+    update self_diary
     set self_id = #{selfId,jdbcType=INTEGER},
       diary_date = #{diaryDate,jdbcType=VARCHAR},
       diary_weather = #{diaryWeather,jdbcType=VARCHAR},

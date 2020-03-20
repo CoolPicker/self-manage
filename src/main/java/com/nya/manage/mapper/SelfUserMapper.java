@@ -14,4 +14,10 @@ public interface SelfUserMapper {
     int updateByPrimaryKeySelective(SelfUser record);
 
     int updateByPrimaryKey(SelfUser record);
+
+    SelfUser selectByUsername(String selfName);
+
+    SelfUser selectByUsernameSelfIdSelective(SelfUser user);
+
+    Integer selectMaxSelfId();
 }

@@ -21,15 +21,15 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
-    from self-goal
+    from self_goal
     where goal_id = #{goalId,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from self-goal
+    delete from self_goal
     where goal_id = #{goalId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.nya.manage.entity.SelfGoal" >
-    insert into self-goal (goal_id, self_id, goal_content, 
+    insert into self_goal (goal_id, self_id, goal_content, 
       goal_level, goal_times, is_new, 
       goal_year, goal_month, goal_day, 
       create_time, update_time)
@@ -39,7 +39,7 @@
       #{createTime,jdbcType=BIGINT}, #{updateTime,jdbcType=BIGINT})
   </insert>
   <insert id="insertSelective" parameterType="com.nya.manage.entity.SelfGoal" >
-    insert into self-goal
+    insert into self_goal
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="goalId != null" >
         goal_id,
@@ -112,7 +112,7 @@
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.nya.manage.entity.SelfGoal" >
-    update self-goal
+    update self_goal
     <set >
       <if test="selfId != null" >
         self_id = #{selfId,jdbcType=INTEGER},
@@ -148,7 +148,7 @@
     where goal_id = #{goalId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.nya.manage.entity.SelfGoal" >
-    update self-goal
+    update self_goal
     set self_id = #{selfId,jdbcType=INTEGER},
       goal_content = #{goalContent,jdbcType=VARCHAR},
       goal_level = #{goalLevel,jdbcType=INTEGER},
