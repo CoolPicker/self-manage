@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nya.manage.mapper.StorageBoxMapper" >
+  <resultMap id="BaseResultMap" type="com.nya.manage.entity.StorageBox" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="space_type" property="spaceType" jdbcType="INTEGER" />
+    <result column="storage_name" property="storageName" jdbcType="VARCHAR" />
+    <result column="is_common_use" property="isCommonUse" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="BIGINT" />
+    <result column="update_time" property="updateTime" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, space_type, storage_name, is_common_use, create_time, update_time
+  </sql>
+
+  <select id="selectMaxId" resultType="java.lang.Integer">
+    select max(id) as id from storage_box
+  </select>
+
+  <select id="selectStorageBoxes" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from storage_box
+  </select>
+
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from storage_box
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from storage_box
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.nya.manage.entity.StorageBox" >
+    insert into storage_box (id, space_type, storage_name, 
+      is_common_use, create_time, update_time
+      )
+    values (#{id,jdbcType=INTEGER}, #{spaceType,jdbcType=INTEGER}, #{storageName,jdbcType=VARCHAR}, 
+      #{isCommonUse,jdbcType=INTEGER}, #{createTime,jdbcType=BIGINT}, #{updateTime,jdbcType=BIGINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.nya.manage.entity.StorageBox" >
+    insert into storage_box
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="spaceType != null" >
+        space_type,
+      </if>
+      <if test="storageName != null" >
+        storage_name,
+      </if>
+      <if test="isCommonUse != null" >
+        is_common_use,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="spaceType != null" >
+        #{spaceType,jdbcType=INTEGER},
+      </if>
+      <if test="storageName != null" >
+        #{storageName,jdbcType=VARCHAR},
+      </if>
+      <if test="isCommonUse != null" >
+        #{isCommonUse,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.nya.manage.entity.StorageBox" >
+    update storage_box
+    <set >
+      <if test="spaceType != null" >
+        space_type = #{spaceType,jdbcType=INTEGER},
+      </if>
+      <if test="storageName != null" >
+        storage_name = #{storageName,jdbcType=VARCHAR},
+      </if>
+      <if test="isCommonUse != null" >
+        is_common_use = #{isCommonUse,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.nya.manage.entity.StorageBox" >
+    update storage_box
+    set space_type = #{spaceType,jdbcType=INTEGER},
+      storage_name = #{storageName,jdbcType=VARCHAR},
+      is_common_use = #{isCommonUse,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=BIGINT},
+      update_time = #{updateTime,jdbcType=BIGINT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

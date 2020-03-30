@@ -17,4 +17,9 @@ public class SelfManagementConstants {
     // 注册
     public static final Integer USERNAME_EXIST = 1111111111; // 用户名已存在
 
+
+    // 本地路径
+    public static final String LOCAL_PATH = "/data/nya/images/";
+    // http头
+    public static final String URL_PATH = "http://172.18.30.78:8089/";
 }
