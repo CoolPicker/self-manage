@@ -4,6 +4,7 @@ import com.nya.manage.constant.SelfManagementConstants;
 import com.nya.manage.entity.Clothes;
 import com.nya.manage.entity.ResponseData;
 import com.nya.manage.mapper.ClothesMapper;
+import com.nya.manage.utils.ImgUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -54,6 +55,7 @@ public class ClothesController {
                 desFile.delete();
             }
             image.transferTo(desFile);
+            new Thread(() -> ImgUtils.reduceImg(filePath)).start();
         } catch (Exception e) {
             e.printStackTrace();
         }
