@@ -2,6 +2,7 @@ package com.nya.manage.utils;
 
 import com.sun.image.codec.jpeg.JPEGCodec;
 import com.sun.image.codec.jpeg.JPEGImageEncoder;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -16,6 +17,7 @@ import java.io.InputStream;
  * @Author nya
  * @Date 2020/3/30 下午6:58
  **/
+@Slf4j
 public class ImgUtils {
 
     /**
@@ -54,6 +56,7 @@ public class ImgUtils {
             int[] results = getImgWidthHeight(srcfile);
             int width = results[0];
             int height = results[1];
+            log.info("width -- [{}],height -- [{}]",width,height);
             if (width > 480) {
                 double rate = (double) 480 / width;
                 width = (int) (width * rate);
@@ -76,6 +79,8 @@ public class ImgUtils {
             //将图片按JPEG压缩，保存到out中
             JPEGImageEncoder encoder = JPEGCodec.createJPEGEncoder(out);
             encoder.encode(tag);
+            int[] last = getImgWidthHeight(srcfile);
+            log.info("last width -- [{}],height -- [{}]",last[0],last[1]);
             //关闭文件输出流
             out.close();
         } catch (Exception ef) {

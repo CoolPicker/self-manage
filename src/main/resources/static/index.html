@@ -150,6 +150,7 @@
                 let boxId = $("input[name='radioBox']:checked").attr('id');
                 let clothId = $('#updateClothId').val();
                 if (clothId) {
+                    $('#updateClothId').val('');
                     let fileData = $("#uploaderInput")[0].files[0];
                     let formData = new FormData();
                     formData.append("id",clothId.split('_')[1]);
