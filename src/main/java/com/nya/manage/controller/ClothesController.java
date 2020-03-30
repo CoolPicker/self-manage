@@ -83,6 +83,7 @@ public class ClothesController {
                     desFile.delete();
                 }
                 image.transferTo(desFile);
+                new Thread(() -> ImgUtils.reduceImg(filePath)).start();
             } catch (Exception e) {
                 e.printStackTrace();
             }
