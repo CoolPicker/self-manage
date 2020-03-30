@@ -21,5 +21,5 @@ public class SelfManagementConstants {
     // 本地路径
     public static final String LOCAL_PATH = "/data/nya/images/";
     // http头
-    public static final String URL_PATH = "http://172.18.30.78:8089/";
+    public static final String URL_PATH = "http://47.100.10.118:8089/";
 }
