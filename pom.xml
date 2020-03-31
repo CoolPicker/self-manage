@@ -140,6 +140,7 @@
                 <configuration>
                     <source>1.8</source>
                     <target>1.8</target>
+                    <!--解决maven打包时对sun包编译不支持-->
                     <compilerArgument>-XDignore.symbol.file</compilerArgument>
                 </configuration>
             </plugin>
